@@ -1,0 +1,33 @@
+Tools needs to be installed
+=====================
+1) Docker Desktop (Windows)
+2) MySql Server (port 3306)
+4) POSTMAN
+3) Java JDK 8
+
+
+Running Application
+===================
+[With DOCKER COMPOSE]
+	1)Open CMD (w/ administrator)
+	2)go to folder "Docker Compose" location, type:
+		cd "..\OnlinetestLinkAja-Sandy\DockerCompose"
+	3)Type "docker-compose build"
+	4)Type "docker-compose up"
+
+[With Command Promt]
+	1)Open CMD (w/ administrator)
+	2)go to dfolder linkaja location, type:
+		cd "..\OnlinetestLinkAja-Sandy\DockerCompose\linkaja"
+	3)type "java -jar linkaja.jar"
+
+
+Check Springboot Application's API  => Running at port 8181
+===================================
+[With POSTMAN]
+	1) with POST method, type url
+		"localhost:8181/account/test"
+		
+[with CMD]
+	1) using CURL command, type:
+		"curl https://localhost/account/test"
