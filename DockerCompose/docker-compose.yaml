@@ -1,0 +1,45 @@
+version: '3'
+services:     
+  # Database Service (Mysql)
+  mysql-service:
+    container_name: mysql-service
+    image: mysql
+    networks:  
+      - foo
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_DATABASE: linkaja
+      #MYSQL_USER: root
+      #MYSQL_PASSWORD: mysql
+      MYSQL_ROOT_PASSWORD: mysql
+      #MYSQL_ROOT_HOST: '%'
+      
+  linkaja:
+    restart: always
+    #restart: on-failure
+    container_name: linkaja
+    image : spring-linkaja
+    build: ./linkaja
+    #working_dir: /linkaja
+    #volumes:
+      #- ./:/linkaja
+      #- ~/.m2:/root/.m2
+    networks:  
+      - foo
+    ports:
+      - 8181:8181
+    links:
+      - mysql-service:mysql-service
+    depends_on: 
+      - mysql-service # This service depends on mysql. Start that first.
+    environment: # Pass environment variables to the service
+        WAIT_HOSTS: mysql:3306
+      #SPRING_DATASOURCE_URL: jdbc:mysql://mysql-service:3306/linkaja
+      #SPRING_DATASOURCE_USERNAME: root
+      #SPRING_DATASOURCE_PASSWORD: mysql
+      
+networks:
+    foo:
+        driver: bridge
